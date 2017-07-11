@@ -9,8 +9,19 @@ var Promise = require('bluebird');
 var bodyParser = require('body-parser');
 var User = require('./api/models/User');
 
+var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/pasarku';
+
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/pasarku');
+mongoose.connect(uristring, function(err, res) {
+    if (err) {
+        console.log('ERROR connecting to: ' + uristring + '. ' + err);
+    } else {
+        console.log('Succeeded connected to: ' + uristring);
+    }
+});
 
 app.use(bodyParser.urlencoded({
     extended: true
