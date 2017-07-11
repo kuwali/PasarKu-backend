@@ -10,8 +10,7 @@ var bodyParser = require('body-parser');
 var User = require('./api/models/User');
 
 var uristring =
-    process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
+    process.env.MONGODB_URI ||
     'mongodb://localhost/pasarku';
 
 mongoose.Promise = Promise;
